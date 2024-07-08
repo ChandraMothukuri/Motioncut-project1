@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine</title>
+</head>
+<body>
+    <div class="search-container">
+        <div class="dropdown">
+            <button class="dropbtn" id="dropdownButton" onclick="toggleDropdown()">
+                <span id="dropdownText">Everything</span>
+                <span class="arrow-down"></span>
+            </button>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="#" onclick="selectOption('Everything')">Everything</a>
+                <a href="#" onclick="selectOption('Software development')">Software development</a>
+                <a href="#" onclick="selectOption('Web development')">Web development</a>
+                <a href="#" onclick="selectOption('Data Analyst')">Data Analyst</a>
+                <a href="#" onclick="selectOption('IT Consultant')">IT Consultant</a>
+                <a href="#" onclick="selectOption('Network administrator')">Network administrator</a>
+            </div>
+        </div>
+        <input type="text" class="search-input" placeholder="Search Anything" id="searchInput">
+        <button class="search-btn" onclick="performSearch()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </button>
+    </div>
+
+
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #d5e8ff;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 70px; /* Increased border radius for a more modern look */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+    overflow: hidden;
+    width: 2000px; /* Increased width */
+    height: 150px; /* Increased height */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #b0327c;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px 0 0 50px; /* Increased border radius */
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+    transition: background-color 0.3s;
+    justify-content: space-between;
+    min-width: 400px;
+    height: 200px;
+
+    
+}
+
+#dropdownText{
+    margin-left: 40px;
+    font-size: 100%;
+}
+
+
+.arrow-down {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 10px;
+    margin-left: 10px;
+    transition: transform 0.3s;
+    font-size: 28px;
+    margin-right: 15px;
+    transform: rotate(45deg);
+
+}
+
+.dropbtn.active .arrow-down {
+    transform: rotate(225deg);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 400px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 15px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block !important;
+}
+
+.search-input {
+    flex: 1; /* Flex property to use remaining space */
+    padding: 15px 40px;
+    border: none;
+    outline: none;
+    font-size: 55px;
+    height: 100%; /* Ensures full height */
+    width: 1200px;
+}
+
+.search-btn {
+    background-color: #b0327c;
+    color: white;
+    border: none;
+    padding: 15px 50px;
+    cursor: pointer;
+    border-radius: 0 50px 50px 0; /* Increased border radius */
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    height: 100%; /* Ensures full height */
+}
+
+.search-btn:hover {
+    background-color: #962564;
+}
+
+.search-btn svg {
+    width: 54px;
+    height: 54px;
+}
+
+
+    </style>
+
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById('dropdownContent').classList.toggle('show');
+            document.getElementById('dropdownButton').classList.toggle('active');
+        }
+
+        function selectOption(option) {
+            document.getElementById('dropdownText').textContent = option;
+            document.getElementById('dropdownContent').classList.remove('show');
+
+        }
+
+        function performSearch() {
+            const category = document.getElementById('dropdownText').textContent.trim();
+            const query = document.getElementById('searchInput').value;
+            alert(`Searching for '${query}' in category '${category}'`);
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.closest('.dropdown')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                        document.getElementById('dropdownButton').classList.remove('active');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
